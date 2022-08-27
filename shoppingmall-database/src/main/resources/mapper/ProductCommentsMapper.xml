@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liny.mall.mapper.ProductCommentsMapper">
+
+    <resultMap id="BaseResultMap" type="com.liny.mall.pojo.ProductComments">
+            <id property="commId" column="comm_id" jdbcType="VARCHAR"/>
+            <result property="productId" column="product_id" jdbcType="VARCHAR"/>
+            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+            <result property="orderItemId" column="order_item_id" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="isAnonymous" column="is_anonymous" jdbcType="INTEGER"/>
+            <result property="commType" column="comm_type" jdbcType="INTEGER"/>
+            <result property="commLevel" column="comm_level" jdbcType="INTEGER"/>
+            <result property="commContent" column="comm_content" jdbcType="VARCHAR"/>
+            <result property="commImgs" column="comm_imgs" jdbcType="VARCHAR"/>
+            <result property="sepcName" column="sepc_name" jdbcType="TIMESTAMP"/>
+            <result property="replyStatus" column="reply_status" jdbcType="INTEGER"/>
+            <result property="replyContent" column="reply_content" jdbcType="VARCHAR"/>
+            <result property="replyTime" column="reply_time" jdbcType="TIMESTAMP"/>
+            <result property="isShow" column="is_show" jdbcType="INTEGER"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        comm_id,product_id,product_name,
+        order_item_id,user_id,is_anonymous,
+        comm_type,comm_level,comm_content,
+        comm_imgs,sepc_name,reply_status,
+        reply_content,reply_time,is_show,
+        is_delete
+    </sql>
+</mapper>

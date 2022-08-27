@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liny.mall.mapper.CategoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.liny.mall.pojo.Category">
+            <id property="categoryId" column="category_id" jdbcType="INTEGER"/>
+            <result property="categoryName" column="category_name" jdbcType="VARCHAR"/>
+            <result property="categoryLevel" column="category_level" jdbcType="INTEGER"/>
+            <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+            <result property="categoryIcon" column="category_icon" jdbcType="VARCHAR"/>
+            <result property="categorySlogan" column="category_slogan" jdbcType="VARCHAR"/>
+            <result property="categoryPic" column="category_pic" jdbcType="VARCHAR"/>
+            <result property="categoryBgColor" column="category_bg_color" jdbcType="VARCHAR"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        category_id,category_name,category_level,
+        parent_id,category_icon,category_slogan,
+        category_pic,category_bg_color,is_delete
+    </sql>
+</mapper>
