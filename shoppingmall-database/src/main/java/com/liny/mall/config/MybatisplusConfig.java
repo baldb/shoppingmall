@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
  * 配置MP的分页插件
  */
 @Configuration
-public class MybatisPlusConfig {
+class MybatisPlusConfig {
 
     /**
      * MyBatis-Plus分页查询配置
