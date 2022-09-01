@@ -3,8 +3,11 @@
 
 package com.liny.mall.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.liny.mall.pojo.Users;
+
+import java.util.List;
 
 /**
  * @author linyi
@@ -13,4 +16,5 @@ import com.liny.mall.pojo.Users;
  */
 public interface UsersService extends IService<Users> {
 
+    Page getPage() ;
 }

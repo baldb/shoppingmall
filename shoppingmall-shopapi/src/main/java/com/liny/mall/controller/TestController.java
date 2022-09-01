@@ -1,5 +1,6 @@
 package com.liny.mall.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liny.mall.pojo.Product;
 import com.liny.mall.pojo.UserAddr;
 import com.liny.mall.pojo.Users;
@@ -35,7 +36,7 @@ public class TestController {
 
     @GetMapping("/test")
     @ApiOperation("获取用户接口")
-    public ResultVo  helo(){
+    public ResultVo<List<Users>>  helo(){
         final List<Users> list = usersService.list();
         return ResultVo.ok(list);
     }
@@ -53,5 +54,12 @@ public class TestController {
         final List<Product> list = productService.list();
 
         return ResultVo.ok(list);
+    }
+
+    @GetMapping("/test04")
+    @ApiOperation("获取分页数据")
+    public ResultVo<Page> helo4(){
+        Page page = usersService.getPage();
+        return ResultVo.ok(page);
     }
 }
