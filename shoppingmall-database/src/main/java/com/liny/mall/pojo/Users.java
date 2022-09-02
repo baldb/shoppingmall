@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
@@ -12,6 +14,7 @@ import lombok.Data;
  */
 @TableName(value ="users")
 @Data
+@ApiModel(value = "Users对象",description = "用户/买家信息")
 public class Users implements Serializable {
     /**
      * 主键id 用户id
@@ -28,6 +31,11 @@ public class Users implements Serializable {
      * 密码 密码
      */
     private String password;
+
+    /**
+     * 账号状态  0 正常 1 冻结
+     */
+    private Integer status;
 
     /**
      * 昵称 昵称
