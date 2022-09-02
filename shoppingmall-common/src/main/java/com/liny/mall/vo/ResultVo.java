@@ -1,5 +1,7 @@
 package com.liny.mall.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -8,14 +10,15 @@ import lombok.Data;
  * 1.0
  */
 @Data
+@ApiModel(value = "数据反回类型")
 public class ResultVo<T> {
-    //@ApiModelProperty(value = "返回码")
+    @ApiModelProperty(value = "返回码")
     private Integer code;
 
-    //@ApiModelProperty(value = "返回消息")
+    @ApiModelProperty(value = "返回消息")
     private String message;
 
-    //@ApiModelProperty(value = "返回数据")
+    @ApiModelProperty(value = "返回数据")
     private T data;
 
     public ResultVo(){}
