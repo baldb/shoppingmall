@@ -75,12 +75,14 @@ public class Users implements Serializable {
     /**
      * 注册时间 创建时间
      */
-    private Date userRegtime;
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
 
     /**
      * 更新时间 更新时间
      */
-    private Date userModtime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     /**
      * 0 正常 1 已被删除

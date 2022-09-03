@@ -8,7 +8,9 @@ import com.liny.mall.pojo.Users;
 import com.liny.mall.service.UsersService;
 import com.liny.mall.vo.ResultCodeEnum;
 import com.liny.mall.vo.ResultVo;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
@@ -20,6 +22,7 @@ import java.util.List;
  * 1.0
  */
 @Service
+@Scope("singleton") //设置为单例模式，每次创建的对象都为同一个
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         implements UsersService {
 
@@ -37,22 +40,24 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
      * @return
      */
     @Override
+    @Transactional
     public ResultVo userResgit(String name, String pwd) {
-        Users user = this.getOne(new LambdaQueryWrapper<Users>()
-                .eq(name != null, Users::getUsername, name)
-        );
-        if(user != null){
-            return ResultVo.fail().message("该账号已存在～");
-        }
-        Users users = new Users();
-        users.setPassword(DigestUtils.md5DigestAsHex(pwd.getBytes()));
-        users.setUsername(name);
-        users.setUserRegtime(new Date());
-        users.setUserModtime(new Date());
-        if(this.save(users)) {
-            return ResultVo.ok().message("注册成功～");
-        }else {
-            return ResultVo.fail().message("异常，注册失败～");
+        //this 锁的是UsersServiceImpl
+        synchronized (this) {
+            Users user = this.getOne(new LambdaQueryWrapper<Users>()
+                    .eq(name != null, Users::getUsername, name)
+            );
+            if(user != null){
+                return ResultVo.fail().message("该账号已存在～");
+            }
+            Users users = new Users();
+            users.setPassword(DigestUtils.md5DigestAsHex(pwd.getBytes()));
+            users.setUsername(name);
+            if(this.save(users)) {
+                return ResultVo.ok().message("注册成功～");
+            }else {
+                return ResultVo.fail().message("异常，注册失败～");
+            }
         }
     }
 
@@ -77,6 +82,6 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             return ResultVo.fail().message("账户状态异常，请申诉");
 
         }
-        return ResultVo.ok().message("登陆成功～");
+        return ResultVo.ok(user).message("登陆成功～");
     }
 }
