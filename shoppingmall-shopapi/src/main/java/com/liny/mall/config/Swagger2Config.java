@@ -27,7 +27,7 @@ public class Swagger2Config {
                 .apiInfo(new ApiInfoBuilder()
                         .title("《锋迷商城》 ")
                         .description("此⽂档详细说明了锋迷商城项⽬后端接⼝规范....")
-                        .termsOfServiceUrl("http://127.0.0.0:8090/")
+                        .termsOfServiceUrl("http://127.0.0.0:8080/")
                         .contact(new Contact("林逸","https://github.com/baldb","1111111@qq.com"))
                         .version("2.0.1")
                         .build())

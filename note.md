@@ -4,6 +4,7 @@
 ```java
 String password = DigestUtils.md5DigestAsHex(pwd.getBytes());
 ``` 
+# @CrossOrigin //允许跨域请求
 
 # 传参类型可以以类的形式传。可扩展性高
 ```java

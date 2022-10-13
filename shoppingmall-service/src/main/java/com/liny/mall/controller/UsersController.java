@@ -18,6 +18,8 @@ import javax.annotation.Resource;
 @RestController
 @Slf4j
 @Api(tags = "用户模块", value = "提供用户注册和登陆接口")
+@RequestMapping("/user")
+@CrossOrigin //允许跨域请求
 public class UsersController {
     @Resource
     private UsersService usersService;
