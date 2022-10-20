@@ -34,10 +34,13 @@ public class UsersController {
 
     @PostMapping("/regist")
     @ApiOperation("⽤户注册接⼝")
-    public ResultVo regist(@ApiParam(value = "用户注册账号") @RequestParam String username,
-                           @ApiParam(value = "用户注册密码") @RequestParam String password) {
-        log.info("⽤户注册=======》"+this.getClass());
-        return usersService.userResgit(username, password);
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(dataType = "string",name = "username", value = "用户注册账号",required = true),
+            @ApiImplicitParam(dataType = "string",name = "password", value = "用户注册密码",required = true)
+    })
+    public ResultVo regist(@RequestBody Users user){
+        log.info("⽤户注册接口 =======》"+this.getClass());
+        ResultVo resultVO = usersService.userResgit(user.getUsername(), user.getPassword());
+        return resultVO;
     }
 }

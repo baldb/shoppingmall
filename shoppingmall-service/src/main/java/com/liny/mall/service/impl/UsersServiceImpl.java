@@ -48,7 +48,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
                     .eq(name != null, Users::getUsername, name)
             );
             if(user != null){
-                return ResultVo.fail().message("该账号已存在～");
+                return ResultVo.fail().message("该账号已被注册，请重新操作～");
             }
             Users users = new Users();
             users.setPassword(DigestUtils.md5DigestAsHex(pwd.getBytes()));

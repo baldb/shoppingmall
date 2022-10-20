@@ -114,44 +114,63 @@
     <script type="text/javascript" src="static/js/jquery-1.9.min.js"></script>
     <script type="text/javascript" src="static/js/cookie_utils.js"></script>
     <script type="text/javascript" src="static/js/vue.js"></script>
-    <!-- <script type="text/javascript" src="static/js/utils.js"></script> -->
-    <!-- <script type="text/javascript" src="static/js/axios.min.js"></script> -->
+    <script type="text/javascript" src="static/js/utils.js"></script>
+    <script type="text/javascript" src="static/js/axios.min.js"></script>
     <script type="text/javascript" src="static/js/base.js"></script>
     <script type="text/javascript">
+      var BaseUrl = "http://localhost:8080";
       var vm = new Vue({
         el: "#container",
         data: {
           username: "",
           password: "",
           tips: "",
-          colorStyle: "",
+          colorStyle: "color:red",
+          isRight: false,
         },
         methods: {
           doSubmit: function () {
             //校验
-            console.log(11111111111111);
-            if (vm.username == "") {
-              vm.tips = "请输入账号！";
-              vm.colorStyle = "color:red";
+            if (vm.isRight) {
+              var url = BaseUrl + "/user/login";
+              axios
+                .get(url, {
+                  params: {
+                    username: vm.username,
+                    password: vm.password,
+                  },
+                })
+                .then((res) => {
+                  //res.data表示后端返回的数据
+                  var vo = res.data;
+                  if (vo.code == 200) {
+                    window.location.href = "index.html";
+                  } else {
+                    vm.tips = vo.message;
+                  }
+                });
+            } else {
+              vm.tips = "请输入正确的账号或密码！";
             }
           },
           checkInfo: function () {
             if (vm.username == "") {
               vm.tips = "请输入账号！";
-              vm.colorStyle = "color:red";
-            } else if (vm.username.length < 8 || vm.username.length > 16) {
-              vm.tips = "账号长度必须为8～16个字符";
-              vm.colorStyle = "color:red";
+              vm.isRight = false;
+            } else if (vm.username.length < 4 || vm.username.length > 16) {
+              vm.tips = "账号长度必须为4～16个字符";
+              vm.isRight = false;
             } else {
               //账号合法
               if (vm.password == "") {
                 vm.tips = "请输入密码！";
-                vm.colorStyle = "color:red";
+                vm.isRight = false;
               } else if (vm.password.length < 6 || vm.password.length > 12) {
                 vm.tips = "密码长度必须为6～12个字符";
-                vm.colorStyle = "color:red";
+                vm.isRight = false;
               } else {
                 vm.tips = "";
+                vm.isRight = true;
               }
             }
           },
