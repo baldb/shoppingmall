@@ -143,6 +143,8 @@
                 .then((res) => {
                   //res.data表示后端返回的数据
                   var vo = res.data;
+                  //如果登陆成功，则把token存储到cookie中
+                  setCooieValue("token", vo.message);
                   if (vo.code == 200) {
                     window.location.href = "index.html";
                   } else {

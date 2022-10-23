@@ -1,6 +1,5 @@
 package com.liny.mall.utils;
 
-import com.liny.mall.pojo.Users;
 import io.jsonwebtoken.*;
 import org.springframework.util.StringUtils;
 
@@ -8,24 +7,24 @@ import java.util.Date;
 
 public class JwtHelper {
 //    private static long tokenExpiration = 24*60*60*1000; //一天
-    private static long tokenExpiration = 60*1000*5; //5分钟
+//    private static long tokenExpiration = 60*1000*5; //5分钟
+    private static long tokenExpiration = 20*1000; //10秒
     //private static final long timeMin = 1000 * 60 * 30;   //30分钟
-    private static String tokenSignKey = "123456";
+    private static String tokenSignKey = "linySHOPPINGMALL";
 
     //生成token字符串
-    public static String createToken(Users users) {
+    public static String createToken(String nickName,Integer userId) {
         String token = Jwts.builder()
 
                 //主题
                 .setSubject("SHOPPING-MALL")
-
                 //有效时间
                 .setExpiration(new Date(System.currentTimeMillis() + tokenExpiration))
 
                 //第二部分：paylod  载客
-                .claim("nickName", users.getNickname())
+                .claim("nickName", nickName)
 //                .claim("userName", userName)
-                .claim("userId", users.getUserId())
+                .claim("userId", userId)
 
                 //第三部分：signature  SignatureAlgorithm.HS256加密算法
                 .signWith(SignatureAlgorithm.HS512, tokenSignKey)
@@ -92,10 +91,7 @@ public class JwtHelper {
                     .setSigningKey(tokenSignKey)
                     .parseClaimsJws(token)
                     .getBody();
-            Users users = new Users();
-            users.setNickname(getNickName(token));
-            users.setUserId(getUserId(token));
-            refreshedToken = JwtHelper.createToken(users);
+            refreshedToken = JwtHelper.createToken(getNickName(token),getUserId(token));
         } catch (Exception e) {
             refreshedToken = null;
         }

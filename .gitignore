@@ -1,0 +1,5 @@
+target/
+*.iml
+.idea/libraries/
+shoppingmall-service/shoppingmall-service.iml
+shoppingmall-shopapi/shoppingmall-shopapi.iml

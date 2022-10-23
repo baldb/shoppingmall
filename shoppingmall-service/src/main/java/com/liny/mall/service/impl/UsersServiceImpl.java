@@ -6,15 +6,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.liny.mall.mapper.UsersMapper;
 import com.liny.mall.pojo.Users;
 import com.liny.mall.service.UsersService;
-import com.liny.mall.vo.ResultCodeEnum;
+import com.liny.mall.utils.JwtHelper;
 import com.liny.mall.vo.ResultVo;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author linyi
@@ -82,6 +80,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             return ResultVo.fail().message("账户状态异常，请申诉");
 
         }
-        return ResultVo.ok(user).message("登陆成功～");
+        //登陆验证成功，则需要生成token令牌，存储在session中
+        String token = JwtHelper.createToken(user.getUsername(),user.getUserId());
+        return ResultVo.ok(user).message("登陆成功～，token："+token);
     }
 }
