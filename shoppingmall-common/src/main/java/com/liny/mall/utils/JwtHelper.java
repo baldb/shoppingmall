@@ -8,7 +8,7 @@ import java.util.Date;
 public class JwtHelper {
 //    private static long tokenExpiration = 24*60*60*1000; //一天
 //    private static long tokenExpiration = 60*1000*5; //5分钟
-    private static long tokenExpiration = 20*1000; //10秒
+    private static long tokenExpiration = 60*1000; //10秒
     //private static final long timeMin = 1000 * 60 * 30;   //30分钟
     private static String tokenSignKey = "linySHOPPINGMALL";
 
@@ -72,6 +72,12 @@ public class JwtHelper {
                     .getExpiration().before(new Date());
             //没有过期，有效，返回false
             return isExpire;
+        }catch (ExpiredJwtException e){
+            //token过期
+            return true;
+        } catch (UnsupportedJwtException e){
+            //Token不合法，请⾃重！
+            return true;
         }catch(Exception e) {
             //过期出现异常，返回true
             return true;

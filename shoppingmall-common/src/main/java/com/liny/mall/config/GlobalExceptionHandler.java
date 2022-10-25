@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author linyi
  * @date 2022/7/29
  * 1.0
+ * 捕捉自定义异常返回给前端
  */
 @Slf4j
 @ControllerAdvice(annotations = {RestController.class, Controller.class})

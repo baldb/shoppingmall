@@ -4,6 +4,7 @@ package com.liny.mall.config;
  * @author linyi
  * @date 2022/7/29
  * 1.0
+ * 自定义异常返回消息
  */
 
 public class CommonException extends RuntimeException{
