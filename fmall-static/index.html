@@ -709,62 +709,7 @@
 						this.isLogin = true;
 						this.username = getCookieValue("username");
 						this.userimg = getCookieValue("userImg");
-					}
-					
-					//轮播图
-					var url1 = baseUrl+"index/indeximg";
-					axios.get(url1).then((res)=>{
-						var vo = res.data;
-						this.indexImgs = vo.data;
-						//console.log("-----------------------轮播图");
-						//console.log(this.indexImgs);
-						//渲染轮播图
-						//初始化轮播图动画效果
-						setTimeout(function(){
-							$('.am-slider').flexslider();
-						},100)
-					});
-					
-					//分类列表
-					var url2 = baseUrl+"index/category-list";
-					axios.get(url2).then((res)=>{
-						console.log(res.data.data);
-						this.categories = res.data.data;
-						//初始化分类列表的动画效果
-						setTimeout(function(){
-							$("li").hover(function() {
-								$(".category-content .category-list li.first .menu-in").css("display", "none");
-								$(".category-content .category-list li.first").removeClass("hover");
-								$(this).addClass("hover");
-								$(this).children("div.menu-in").css("display", "block")
-							}, function() {
-								$(this).removeClass("hover")
-								$(this).children("div.menu-in").css("display", "none")
-							});
-						},100);
-					});
-					
-					//新品推荐
-					var url3 = baseUrl+"index/list-recommends";
-					axios.get(url3).then((res)=>{
-						console.log(res.data.data);
-						this.recommendProducts = res.data.data;
-						
-					});
-					
-					//分类商品
-					var url4 = baseUrl+"index/category-recommends";
-					axios.get(url4).then((res)=>{
-						console.log(res.data.data);
-						this.recommendCategories = res.data.data;
-					});
-					
-				},
-				methods:{
-					toSearch:function(){
-						var url = "search.html?keyword="+this.keyword;
-						window.location.href = encodeURI(url);
-					}
+					}	
 				}
 			});
 			

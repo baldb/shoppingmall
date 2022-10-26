@@ -80,8 +80,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             return ResultVo.fail().message("账户状态异常，请申诉");
 
         }
-        //登陆验证成功，则需要生成token令牌，存储在session中
+        //登陆验证成功，则需要生成token令牌，存储在message中，由前端统一存在session中
         String token = JwtHelper.createToken(user.getUsername(),user.getUserId());
-        return ResultVo.ok(user).message("登陆成功～，token："+token);
+        return ResultVo.ok(user).message(token);
     }
 }

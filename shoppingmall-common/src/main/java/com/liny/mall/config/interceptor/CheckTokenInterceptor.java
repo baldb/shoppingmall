@@ -25,8 +25,13 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
+        //放⾏options请求，涉及到三次握手知识
+        String method = request.getMethod();
+        if("OPTIONS".equalsIgnoreCase(method)){
+            return true;
+        }
         log.info("请求被拦截=========>{}",request.getRequestURL());
-        String token = request.getParameter("token");
+        String token = request.getHeader("token");
         if (token == null) {
             //提示请先登录
             doResponse(response, ResultVo.build(null, ResultCodeEnum.LOGIN_AUTH).message("请先登录！"));

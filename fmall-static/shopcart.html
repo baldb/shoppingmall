@@ -317,6 +317,7 @@
 				},
 				created:function(){
 					var token = getCookieValue("token");
+					console.log(token)
 					if(token == null){
 						var loginUrl = "login.html?tips=请先登录！&returnUrl=shopcart.html";
 						window.location.href = encodeURI(loginUrl);
@@ -336,11 +337,11 @@
 							}
 						}).then((res)=>{
 							console.log(res.data);
-							if(res.data.code==20002 || res.data.code==20001){
+							if(res.data.code==208 || res.data.code==208){
 								//token过期
 								var loginUrl = "login.html?tips=请先登录！&returnUrl=shopcart.html";
 								window.location.href = encodeURI(loginUrl);
-							}else if(res.data.code==10000){
+							}else if(res.data.code==200){
 								//请求成功
 								this.shopcarts = res.data.data;
 							}else if(res.data.code==10001){

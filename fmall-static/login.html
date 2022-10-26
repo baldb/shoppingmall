@@ -144,8 +144,11 @@
                   //res.data表示后端返回的数据
                   var vo = res.data;
                   //如果登陆成功，则把token存储到cookie中
-                  setCooieValue("token", vo.message);
                   if (vo.code == 200) {
+                    setCookieValue("token", vo.message);
+                    //将用户昵称和头像路径保存在cookie中
+                    setCookieValue("username", vo.data.username);
+                    setCookieValue("userImg", vo.data.userImg);
                     window.location.href = "index.html";
                   } else {
                     vm.tips = vo.message;

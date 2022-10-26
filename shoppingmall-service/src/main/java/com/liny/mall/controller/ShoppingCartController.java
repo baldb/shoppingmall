@@ -28,14 +28,9 @@ public class ShoppingCartController {
 
     @GetMapping("/list")
     @ApiOperation("获取购物车列表接⼝")
-    public ResultVo listShoppingCartsByUserI( @ApiParam(value = "用户令牌")String token){
+    public ResultVo listShoppingCartsByUserI( @ApiParam(value = "userId") String userId){
         log.info("购物车列表接口=======》"+this.getClass());
-        if(JwtHelper.isExpiration(token)){
-            return ResultVo.build(null,ResultCodeEnum.TOKEN_ERROR).message("用户已过期，请重新登陆～");
-        }
-        String nickName = JwtHelper.getNickName(token);
-        Integer userId = JwtHelper.getUserId(token);
-        return ResultVo.ok().message("nickName:"+nickName+"id:"+userId);
+        return ResultVo.ok().message("id:"+userId);
     }
 
 }
