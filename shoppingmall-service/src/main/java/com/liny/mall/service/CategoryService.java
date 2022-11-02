@@ -2,6 +2,7 @@ package com.liny.mall.service;
 
 import com.liny.mall.pojo.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liny.mall.vo.ResultVo;
 
 /**
 * @author linyi
@@ -10,4 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CategoryService extends IService<Category> {
 
+    //查询分类信息列表
+    ResultVo listCategories();
 }

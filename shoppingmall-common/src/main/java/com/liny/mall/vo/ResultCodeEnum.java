@@ -38,7 +38,8 @@ public enum ResultCodeEnum {
     COUPON_LIMIT_GET(221, "优惠券已发放完毕"),
     LOGIN_CODE(222,"长时间未操作,会话已失效,请刷新页面后重试!"),
     CODE_ERROR(223,"验证码错误!"),
-    TOKEN_ERROR(224,"Token无效!")
+    TOKEN_ERROR(224,"Token无效!"),
+    PARAMETER_NULL(300,"所要数据为null")
     ;
 
     private Integer code;
