@@ -2,6 +2,7 @@ package com.liny.mall.service;
 
 import com.liny.mall.pojo.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.liny.mall.vo.ResultVo;
 
 /**
 * @author linyi
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ProductService extends IService<Product> {
 
+    ResultVo listRecommendProducts();
 }

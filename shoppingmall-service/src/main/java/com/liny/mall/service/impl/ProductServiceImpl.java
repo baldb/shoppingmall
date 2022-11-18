@@ -1,10 +1,18 @@
 package com.liny.mall.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.liny.mall.pojo.Product;
+import com.liny.mall.pojo.ProductImg;
+import com.liny.mall.pojo.vo.ProductVO;
 import com.liny.mall.service.ProductService;
 import com.liny.mall.mapper.ProductMapper;
+import com.liny.mall.vo.ResultVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @author linyi
@@ -15,7 +23,17 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product>
     implements ProductService{
 
+    @Autowired
+    private ProductMapper productMapper;
+    @Override
+    public ResultVo listRecommendProducts() {
+        //List<ProductVO> productVOList = new ArrayList<>();
+        //使用多态。
+
+        return ResultVo.ok(productMapper.listRecommendProducts());
+    }
 }
+
 
 
 

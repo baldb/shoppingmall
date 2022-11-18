@@ -5,16 +5,16 @@
 <mapper namespace="com.liny.mall.mapper.ProductMapper">
 
     <resultMap id="BaseResultMap" type="com.liny.mall.pojo.Product">
-            <id property="productId" column="product_id" jdbcType="VARCHAR"/>
-            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
-            <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
-            <result property="rootCategoryId" column="root_category_id" jdbcType="INTEGER"/>
-            <result property="soldNum" column="sold_num" jdbcType="INTEGER"/>
-            <result property="productStatus" column="product_status" jdbcType="INTEGER"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+        <id property="productId" column="product_id" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="rootCategoryId" column="root_category_id" jdbcType="INTEGER"/>
+        <result property="soldNum" column="sold_num" jdbcType="INTEGER"/>
+        <result property="productStatus" column="product_status" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -23,4 +23,32 @@
         content,create_time,update_time,
         is_delete
     </sql>
+
+
+    <resultMap id="ProductVOMap" type="com.liny.mall.pojo.vo.ProductVO">
+        <id property="productId" jdbcType="VARCHAR" column="product_id"/>
+        <result property="productName" jdbcType="VARCHAR" column="product_name"/>
+        <result property="categoryId" jdbcType="INTEGER" column="category_id"/>
+        <result property="rootCategoryId" jdbcType="INTEGER" column="root_category_id"/>
+        <result property="soldNum" jdbcType="INTEGER" column="sold_num"/>
+        <result property="productStatus" jdbcType="INTEGER" column="product_status"/>
+        <result property="content" jdbcType="VARCHAR" column="content"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+        <collection property="imgs" javaType="java.util.List" ofType="com.liny.mall.pojo.ProductImg">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="itemId" column="item_id" jdbcType="VARCHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="isMain" column="is_main" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+    <select id="listRecommendProducts" resultMap="ProductVOMap">
+        select * from product
+        left join product_img
+        on product.product_id = product_img.item_id
+        where product_img.is_main = 1
+        order by create_time desc
+        limit 0,3;
+    </select>
 </mapper>

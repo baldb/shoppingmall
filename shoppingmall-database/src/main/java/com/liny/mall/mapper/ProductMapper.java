@@ -2,6 +2,10 @@ package com.liny.mall.mapper;
 
 import com.liny.mall.pojo.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.liny.mall.pojo.vo.ProductVO;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
 * @author linyi
@@ -9,8 +13,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2022-08-27 11:17:22
 * @Entity com.liny.mall.pojo.Product
 */
+@Repository
 public interface ProductMapper extends BaseMapper<Product> {
-
+    List<ProductVO> listRecommendProducts();
 }
 
 

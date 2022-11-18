@@ -1,7 +1,9 @@
 package com.liny.mall.controller;
 
+import com.liny.mall.pojo.Product;
 import com.liny.mall.service.CategoryService;
 import com.liny.mall.service.IndexImgService;
+import com.liny.mall.service.ProductService;
 import com.liny.mall.vo.ResultVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +32,9 @@ public class IndexImgController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private ProductService productService;
+
     @ApiOperation("根据sql字段获取排序好的轮播图列表")
     @GetMapping("/indeximg")
     public ResultVo getIndexImgList(){
@@ -43,11 +48,11 @@ public class IndexImgController {
     }
 
 
-    //@GetMapping("/list-recommends")
-    //@ApiOperation("新品推荐接口")
-    //public ResultVO listRecommendProducts() {
-    //    return productService.listRecommendProducts();
-    //}
+    @GetMapping("/list-recommends")
+    @ApiOperation("新品推荐接口")
+    public ResultVo listRecommendProducts() {
+        return productService.listRecommendProducts();
+    }
     //
     //@GetMapping("/category-recommends")
     //@ApiOperation("分类推荐接口")
