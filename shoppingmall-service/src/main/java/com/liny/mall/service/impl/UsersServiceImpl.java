@@ -51,6 +51,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             Users users = new Users();
             users.setPassword(DigestUtils.md5DigestAsHex(pwd.getBytes()));
             users.setUsername(name);
+            users.setUserImg("img/default.png");
             if(this.save(users)) {
                 return ResultVo.ok().message("注册成功～");
             }else {

@@ -34,6 +34,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
         //}
         return ResultVo.ok(categoryVOS);
     }
+
+    @Override
+    public ResultVo listFirstLevelCategories() {
+        return ResultVo.ok(categoryMapper.selectFirstLevelCategories());
+    }
 }
 
 

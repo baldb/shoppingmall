@@ -70,4 +70,28 @@
                            on c3.parent_id = c2.category_id
         where c1.category_level = 1
     </select>
+
+
+    <resultMap id="CategoryVOtMap02" type="com.liny.mall.pojo.vo.CategoryVO">
+        <id property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="categoryName" column="category_name" jdbcType="VARCHAR"/>
+        <result property="categoryLevel" column="category_level" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="categoryIcon" column="category_icon" jdbcType="VARCHAR"/>
+        <result property="categorySlogan" column="category_slogan" jdbcType="VARCHAR"/>
+        <result property="categoryPic" column="category_pic" jdbcType="VARCHAR"/>
+        <result property="categoryBgColor" column="category_bg_color" jdbcType="VARCHAR"/>
+        <collection property="products" select="com.liny.mall.mapper.ProductMapper.selectTop6ByCategoryId" column="category_id" />
+    </resultMap>
+    <select id="selectFirstLevelCategories" resultMap="CategoryVOtMap02">
+        select category_id,
+        category_name,
+        category_level,
+        parent_id,
+        category_icon,
+        category_slogan,
+        category_pic,
+        category_bg_color
+        from category where category_level=1
+    </select>
 </mapper>

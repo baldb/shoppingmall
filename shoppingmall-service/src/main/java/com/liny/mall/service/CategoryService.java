@@ -13,4 +13,7 @@ public interface CategoryService extends IService<Category> {
 
     //查询分类信息列表
     ResultVo listCategories();
+
+    //查询分类商品推荐
+    ResultVo listFirstLevelCategories();
 }

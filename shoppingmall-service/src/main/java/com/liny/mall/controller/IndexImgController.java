@@ -1,5 +1,6 @@
 package com.liny.mall.controller;
 
+import com.liny.mall.mapper.ProductMapper;
 import com.liny.mall.pojo.Product;
 import com.liny.mall.service.CategoryService;
 import com.liny.mall.service.IndexImgService;
@@ -53,10 +54,12 @@ public class IndexImgController {
     public ResultVo listRecommendProducts() {
         return productService.listRecommendProducts();
     }
-    //
-    //@GetMapping("/category-recommends")
-    //@ApiOperation("分类推荐接口")
-    //public ResultVO listRecommendProductsByCategory(){
-    //    return categoryService.listFirstLevelCategories();
-    //}
+
+    @Autowired
+    private ProductMapper productMapper;
+    @GetMapping("/category-recommends")
+    @ApiOperation("分类推荐接口")
+    public ResultVo listRecommendProductsByCategory(){
+        return categoryService.listFirstLevelCategories();
+    }
 }

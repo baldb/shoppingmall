@@ -51,4 +51,16 @@
         order by create_time desc
         limit 0,3;
     </select>
+
+
+
+    <select id="selectTop6ByCategoryId" resultMap="ProductVOMap">
+        select * from product
+        left join product_img
+        on product.product_id = product_img.item_id
+        where product.root_category_id = #{id}
+        and product_img.is_main = 1
+        order by product.sold_num desc
+        limit 0,6;
+    </select>
 </mapper>

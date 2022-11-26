@@ -15,7 +15,11 @@ import java.util.List;
 */
 @Repository
 public interface ProductMapper extends BaseMapper<Product> {
+    //每日推荐
     List<ProductVO> listRecommendProducts();
+
+    //查询指定类别下销量最高的前六个商品
+    public List<ProductVO> selectTop6ByCategoryId(Integer id);
 }
 
 

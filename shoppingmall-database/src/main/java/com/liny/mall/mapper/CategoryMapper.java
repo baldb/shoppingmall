@@ -19,6 +19,9 @@ public interface CategoryMapper extends BaseMapper<Category> {
     //1.连接查询
     public List<CategoryVO> selectAllCategories();
 
+    //查询一级类别
+    List<CategoryVO> selectFirstLevelCategories();
+
 }
 
 
